@@ -1,4 +1,4 @@
-package com.example.first_app;
+package com.example.first_app.controllers;
 
 import java.util.Optional;
 
@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.example.first_app.models.Product;
+import com.example.first_app.repositories.ProductRepository;
 
 @RestController
 public class ProductController {

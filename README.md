@@ -1,22 +1,22 @@
 # Java Spring Boot Project
 
-## Lancer le Project
+## Run the project
 
 ```sh
 mvn spring-boot:run
 ```
 
-## Mettre à jour les dépendances :
+## Update the dependencies :
 
-Modifier le fichier `pom.xml`
+Modify the `pom.xml` file.
 
-Et clean le projet :
+And clean the project :
 
 ```sh
 mvn clean install
 ```
 
-## Ajouter la dépendance pour le hot reload :
+## Add the dependency for hot reload :
 
 ```xml
 <dependency>
@@ -24,4 +24,15 @@ mvn clean install
     <artifactId>spring-boot-devtools</artifactId>
     <optional>true</optional>
 </dependency>
+```
+
+## Structure
+
+```
+first_app
+|-> controllers/
+|-> models/
+|-> repositories/
+|-> services/
+|-> FirstAppApplication.java # The main entry of the app
 ```
