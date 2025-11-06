@@ -28,6 +28,12 @@ public class HelloController {
         return "Hello " + name;
     }
 
+    // Get Route with Path Variables
+    @GetMapping("/sum")
+    public int getSum(@RequestParam int x, @RequestParam int y) {
+        return x + y;
+    }
+
     // Post Route with Request Body
     @PostMapping("/hello")
     public String createResource(@RequestBody User user) {

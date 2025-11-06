@@ -13,7 +13,7 @@ Modifier le fichier `pom.xml`
 Et clean le projet :
 
 ```sh
-mvn clean
+mvn clean install
 ```
 
 ## Ajouter la dépendance pour le hot reload :
