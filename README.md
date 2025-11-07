@@ -64,3 +64,20 @@ public ResponseEntity<Map<String, String>> handleValidationExceptions(MethodArgu
     return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
 }
 ```
+
+## Lombok
+
+Lombok is a Java library that aims to reduce this boilerplate by automatically generating code for commonly used patterns like getters, setters, constructors...
+
+By integrating Lombok with Spring Boot, you can significantly simplify your code, making it easier to read, maintain, and write.
+
+### Add to dependecy (pom.xml)
+
+```xml
+  <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.34</version>
+      <scope>provided</scope>
+  </dependency>
+```

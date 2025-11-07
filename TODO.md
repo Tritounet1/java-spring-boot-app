@@ -1,10 +1,5 @@
 # TO DO
 
-🏗️ Niveau 4 : Bonnes pratiques entreprise
-
-Ajoute Lombok pour simplifier ton code (@Getter, @Setter, @Builder, etc.).
-➤ (Cherche comment l’activer dans un projet Maven)
-
 🧠 Niveau 5 : Bonus — Niveau entreprise
 
 Ajoute une logique de logging cohérente (logback / slf4j).
