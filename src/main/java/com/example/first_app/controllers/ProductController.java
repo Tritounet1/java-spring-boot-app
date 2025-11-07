@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.first_app.exceptions.ResourceNotFoundException;
 import com.example.first_app.models.Product;
 import com.example.first_app.repositories.ProductRepository;
+
+import jakarta.validation.Valid;
 
 @RestController
 public class ProductController {
@@ -34,8 +37,14 @@ public class ProductController {
 
     @DeleteMapping("/products/{id}")
     public ResponseEntity<String> deleteProductsWithId(@PathVariable Long id) {
-        productRepository.deleteById(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Product delete.");
+        return productRepository.findById(id)
+                .map(product -> {
+                    productRepository.deleteById(id);
+                    return ResponseEntity.ok("Product delete");
+                })
+                .orElseGet(() -> {
+                    throw new ResourceNotFoundException("No product with the id : " + id);
+                });
     }
 
     @PutMapping("/products/{id}")
@@ -49,14 +58,12 @@ public class ProductController {
                     return ResponseEntity.ok(updated);
                 })
                 .orElseGet(() -> {
-                    newProduct.setId(id);
-                    productRepository.save(newProduct);
-                    return ResponseEntity.status(HttpStatus.CREATED).body(newProduct);
+                    throw new ResourceNotFoundException("No product with the id : " + id);
                 });
     }
 
     @PostMapping("/products")
-    public ResponseEntity<Product> postProducts(@RequestBody Product product) {
+    public ResponseEntity<Product> postProducts(@Valid @RequestBody Product product) {
         productRepository.save(product);
         return ResponseEntity.status(HttpStatus.OK).body(product);
     }
