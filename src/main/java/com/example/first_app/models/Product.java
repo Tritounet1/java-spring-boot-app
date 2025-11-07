@@ -32,4 +32,22 @@ public class Product {
         this.name = name;
         this.price = price;
     }
+
+    // TODO delete this after fix mvn clean install problem
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Double getPrice() {
+        return this.price;
+    }
+
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
 }

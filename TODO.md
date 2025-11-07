@@ -9,5 +9,3 @@ Configure des profils Spring (application-dev.properties, application-prod.prope
 Implémente un service métier avec des appels entre plusieurs classes.
 
 Mets en place un endpoint asynchrone (avec @Async).
-
-Ajoute une documentation automatique via Springdoc OpenAPI (Swagger UI).

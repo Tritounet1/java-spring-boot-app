@@ -1,6 +1,6 @@
 package com.example.first_app.controllers;
 
-import java.util.Collection;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,31 +10,27 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.first_app.models.User;
-import com.example.first_app.services.UserService;
+import com.example.first_app.repositories.UserRepository;
 
 @RestController
 public class UserController {
 
     @Autowired
-    UserService userService;
+    UserRepository userRepository;
 
     @GetMapping("/users")
-    public Collection<User> getUsers() {
-        return userService.getUsers();
+    public Iterable<User> getUsers() {
+        return userRepository.findAll();
     }
 
     @GetMapping("/users/{id}")
-    public User getId(@PathVariable int id) {
-        return userService.getUserById(id);
+    public Optional<User> getId(@PathVariable Long id) {
+        return userRepository.findById(id);
     }
 
     @PostMapping("/users")
     public String createResource(@RequestBody User user) {
-        user.setId(userService.getUsers().size());
-        if (userService.userAlreadyExist(user)) {
-            return "User not created, this email is already used.";
-        }
-        userService.addUser(user);
+        userRepository.save(user);
         return "New user created.";
     }
 }
