@@ -37,6 +37,12 @@ first_app
 |-> FirstAppApplication.java # The main entry of the app
 ```
 
+## Handle Exceptions
+
+### Link
+
+[Medium, Handle exceptions in spring boot guide](https://medium.com/@sharmapraveen91/handle-exceptions-in-spring-boot-a-guide-to-clean-code-principles-e8a9d56cafe8)
+
 ## Jakarta validation
 
 ```java

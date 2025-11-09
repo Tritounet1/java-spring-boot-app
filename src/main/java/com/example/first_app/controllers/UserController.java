@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.first_app.models.User;
 import com.example.first_app.repositories.UserRepository;
+import com.example.first_app.services.TokenService;
 
 @RestController
 public class UserController {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    TokenService tokenService;
 
     @GetMapping("/users")
     public Iterable<User> getUsers() {
@@ -28,9 +32,33 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    @PostMapping("/users")
-    public String createResource(@RequestBody User user) {
-        userRepository.save(user);
-        return "New user created.";
+    @PostMapping("/register")
+    public String register(@RequestBody User user) {
+        Optional<User> existingUser = userRepository.findByEmail(user.getEmail());
+
+        if (existingUser.isPresent()) {
+            return "User already exist with this email";
+        }
+
+        existingUser = userRepository.findByUsername(user.getUsername());
+
+        if (existingUser.isPresent()) {
+            return "User already exist with this username";
+        }
+
+        User savedUser = userRepository.saveAndFlush(user);
+        return tokenService.createToken(savedUser);
     }
+
+    @PostMapping("/login")
+    public String login(@RequestBody User searchUser) {
+        for (User user : userRepository.findAll()) {
+            if (user.getUsername().equals(searchUser.getUsername())
+                    && user.getPassword().equals(searchUser.getPassword())) {
+                return tokenService.createToken(user);
+            }
+        }
+        return "no user found.";
+    }
+
 }
